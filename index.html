@@ -97,6 +97,16 @@
         let lastPinchDist = null;
         const slider = document.getElementById('plier-slider');
         const plierMoveCheckbox = document.getElementById('plier-move-checkbox');
+
+        // Päivitä OrbitControls zoomaus sallittu/ei sallittu valintaruudun mukaan
+        function updateControlsZoom() {
+            if (controls) {
+                controls.enableZoom = !plierMoveCheckbox.checked;
+            }
+        }
+        plierMoveCheckbox.addEventListener('change', updateControlsZoom);
+        updateControlsZoom();
+
         window.addEventListener('touchstart', function(e) {
             if (e.touches.length === 2) {
                 lastPinchDist = getPinchDistance(e.touches[0], e.touches[1]);
